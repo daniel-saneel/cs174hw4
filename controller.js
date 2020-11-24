@@ -1,11 +1,10 @@
 var selected;
-
+var permuted; 
 function ClickTile(div){
-    debugger;
-   if(selected == div){
-selected = null;
-div.style.border = "1px black solid";
-return false;
+    if(selected == div){
+    selected = null;
+    div.style.border = "1px black solid";
+    return false;
    }
    else if(selected !=null && selected!=undefined){
     div.style.border = "1px black solid";
@@ -18,6 +17,6 @@ return false;
    }
    else{
        selected = div;
-       div.style.border = "5px red dashed";
+       div.style.border = "5px blue dashed";
    }
 }

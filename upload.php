@@ -12,6 +12,9 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 $logger = new Logger('main');
 $logger->pushHandler(new StreamHandler($target_dir.'jigsaw.log', Logger::DEBUG));
 
+$actualArray = [];
+$permuted = [];
+
 // Check if image file is a actual image or fake image
 
 if(isset($_POST["submit"])) {
@@ -36,7 +39,7 @@ if (file_exists($target_file)) {
 }
 
 // Check file size
-if ($_FILES["uploadedFile"]["size"] > 500000) {
+if ($_FILES["uploadedFile"]["size"] > 2097152) {
     $logger->info("Sorry, your file is too large.\n\r");
     echo "Sorry, your file is too large.\n\r";
   $uploadOk = 0;
@@ -60,7 +63,6 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
       $logger->info("The file ". htmlspecialchars( basename( $_FILES["uploadedFile"]["name"])). " has been uploaded.\n\r");
       // echo "The file ". htmlspecialchars( basename( $_FILES["uploadedFile"]["name"])). " has been uploaded.\n\r";
 
-
       $filename = 'active_image.jpg';
 
       $width = 360; 
@@ -74,7 +76,12 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
       $image = imagecreatefromjpeg($target_file); 
       imagecopyresized($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig); 
         
-      imagejpeg($image_p,$target_dir.$filename, 100);
+      if($imageFileType != "jpg" || $imageFileType != "jpeg"){
+        imagejpeg($image_p,$target_dir.$filename, 100);
+      }
+      else if($imageFileType != "png"){
+        imagepng($im);
+      }
       
       GenerateImages($target_dir,$filename);
 
@@ -85,30 +92,19 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 }
 
 function GenerateImages($target_dir,$FileName){
-$viewLoadString =[];
-//   $im = imagecreatefromjpeg($target_dir.$FileName);
-// $counter = 0;
-//   for($j = 0; $j<=2; $j++){
-//     for($i = 0; $i<=2; $i++){
-//     $im2 = imagecrop($im, ['x' => 120*$i, 'y' => 120*$j, 'width' => 120, 'height' => 120]);
-//     imagejpeg($im2,$target_dir.$i.$j.'.jpg', 100);
-//     $viewLoadString [$counter]= "<div onclick='ClickTile(this);' style='background-image:url(".$target_dir.$i.$j.'.jpg'.");height:120px;width:120px;display:inline-block;border:1px solid black;'></div>&nbsp;";
-//   $counter++;
-// }
-// }
-
-$numbers = range(0, 8);
-shuffle($numbers);
-$view = "";
-$counter = 0;
-foreach($numbers as $number){
-  $view = $view.'<div class="image'.($number+1).'" onclick="ClickTile(this);"></div>&nbsp;';
-  if($counter == 2 || $counter == 5){
-    $view = $view.'<br>';  
+  $viewLoadString =[];
+  $numbers = range(0, 8);
+  $actualArray = $numbers;
+  $permuted = shuffle($numbers);
+  $view = "";
+  $counter = 0;
+  foreach($numbers as $number){
+    $view = $view.'<div class="image'.($number).' " onclick="ClickTile(this);"></div>&nbsp;';
+    if($counter == 2 || $counter == 5){
+      $view = $view.'<br>';
+    }
+    $counter++;
   }
-  $counter++;
+  echo($view);
 }
-echo($view);
-}
-
 ?>

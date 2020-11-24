@@ -11,55 +11,55 @@ use MonologHandlerSwiftMailerHandler;
 <script src='controller.js'></script>
   <title>Community Jigsaw</title>
   <style>
-  .image1{
+  .image0{
     background-image:url("src/resources/active_image.jpg");
     background-position: 0px 0px;
     height:120px;width:120px;
     display:inline-block;
   }
-  .image2{
+  .image1{
     background-image:url("src/resources/active_image.jpg");
     background-position: 120px 0px;
     height:120px;width:120px;    
     display:inline-block;
   }
-  .image3{
+  .image2{
     background-image:url("src/resources/active_image.jpg");
     background-position: 240px 0px;
     height:120px;width:120px;
     display:inline-block;
   }
-  .image4{
+  .image3{
     background-image:url("src/resources/active_image.jpg");
     background-position: 0px 120px;
     height:120px;width:120px;
     display:inline-block;
   }
-  .image5{
+  .image4{
     background-image:url("src/resources/active_image.jpg");
     background-position: 120px 120px;
     height:120px;width:120px;
     display:inline-block;
   }
-  .image6{
+  .image5{
     background-image:url("src/resources/active_image.jpg");
     background-position: 240px 120px;
     height:120px;width:120px;
     display:inline-block;
   }
-  .image7{
+  .image6{
     background-image:url("src/resources/active_image.jpg");
     background-position: 0px 240px;
     height:120px;width:120px;
     display:inline-block;
   }
-  .image8{
+  .image7{
     background-image:url("src/resources/active_image.jpg");
     background-position: 120px 240px;
     height:120px;width:120px;
     display:inline-block;
   }
-  .image9{
+  .image8{
     background-image:url("src/resources/active_image.jpg");
     background-position: 240px 240px;
     height:120px;width:120px;
